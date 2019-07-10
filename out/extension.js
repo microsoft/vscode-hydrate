@@ -14,8 +14,7 @@ const vscode = require("vscode");
 const k8s = require("vscode-kubernetes-tools-api");
 let kubectl = undefined;
 let clusterExplorer = undefined;
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+// Method called when extension is activated
 function activate(context) {
     return __awaiter(this, void 0, void 0, function* () {
         const clusterExplorerAPI = yield k8s.extension.clusterExplorer.v1;
@@ -33,9 +32,10 @@ function activate(context) {
     });
 }
 exports.activate = activate;
+// TO-DO: add call to Hydrate Python script
 function hydrateCluster() {
 }
-// this method is called when your extension is deactivated
+// This method is called when extension is deactivated
 function deactivate() { }
 exports.deactivate = deactivate;
 //# sourceMappingURL=extension.js.map

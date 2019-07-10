@@ -6,8 +6,7 @@ import * as k8s from 'vscode-kubernetes-tools-api';
 let kubectl: k8s.KubectlV1 | undefined = undefined;
 let clusterExplorer: k8s.ClusterExplorerV1 | undefined = undefined;
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+// Method called when extension is activated
 export async function activate (context: vscode.ExtensionContext) {
 	const clusterExplorerAPI = await k8s.extension.clusterExplorer.v1;
 	const kubectlAPI = await k8s.extension.kubectl.v1;
@@ -27,10 +26,10 @@ export async function activate (context: vscode.ExtensionContext) {
     context.subscriptions.push(...subscriptions);
 }
 
-
+// TO-DO: add call to Hydrate Python script
 function hydrateCluster () {
 
 }
 
-// this method is called when your extension is deactivated
+// This method is called when extension is deactivated
 export function deactivate() {}
