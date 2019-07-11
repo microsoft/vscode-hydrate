@@ -1,5 +1,5 @@
 # Welcome to the VS Code Hydrate Extension
-This extension will allow users to select a Kubernetes cluster to run Hydrate on. This quickstart guide will be continuously updated as features are added. Currently, the extension is a clone of a sample "Hello World" extension.
+This extension will allow users to select a Kubernetes cluster to run Hydrate on. This quickstart guide will be continuously updated as features are added. Currently, the extension builds upon the existing [VSCode Kubernetes Extension](https://github.com/Azure/vscode-kubernetes-tools). Upon right-clicking a cluster, an option to "Hydrate Cluster" is shown, though it currently has no functionality yet.
 
 ## What's in the folder
 
@@ -10,10 +10,10 @@ This extension will allow users to select a Kubernetes cluster to run Hydrate on
   * The file exports one function, `activate`, which is called the very first time your extension is activated (in this case by executing the command). Inside the `activate` function we call `registerCommand`.
   * We pass the function containing the implementation of the command as the second parameter to `registerCommand`.
 
-## Get up and running straight away
+## Get up and running
 
 * Press `F5` to open a new window with your extension loaded.
-* Run your command from the command palette by pressing (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac) and typing `Hello World`.
+* Click the Kubernetes icon in the sidebar to open the Kubernetes extension. Once the clusters load, right-clicking a cluster will display an option to `Hydrate Cluster`.
 * Set breakpoints in your code inside `src/extension.ts` to debug your extension.
 * Find output from your extension in the debug console.
 
