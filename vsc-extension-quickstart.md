@@ -1,4 +1,5 @@
-# Welcome to your VS Code Extension
+# Welcome to the VS Code Hydrate Extension
+This extension will allow users to select a Kubernetes cluster to run Hydrate on. This quickstart guide will be continuously updated as features are added. Currently, the extension is a clone of a sample "Hello World" extension.
 
 ## What's in the folder
 
