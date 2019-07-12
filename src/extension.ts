@@ -11,19 +11,19 @@ export async function activate (context: vscode.ExtensionContext) {
 	const clusterExplorerAPI = await k8s.extension.clusterExplorer.v1;
 	const kubectlAPI = await k8s.extension.kubectl.v1;
 
-    if (!clusterExplorerAPI.available ||  !kubectlAPI.available) {
-        vscode.window.showErrorMessage("Unable to access Kubernetes extension");
-        return;
-    }
+	if (!clusterExplorerAPI.available ||  !kubectlAPI.available) {
+		vscode.window.showErrorMessage("Unable to access Kubernetes extension");
+		return;
+	}
 
-    clusterExplorer = clusterExplorerAPI.api;
+	clusterExplorer = clusterExplorerAPI.api;
 	kubectl = kubectlAPI.api;
 	
 	const subscriptions = [
 		vscode.commands.registerCommand('vshydrate.hydrateCluster', hydrateCluster),
-    ];
+	];
 
-    context.subscriptions.push(...subscriptions);
+	context.subscriptions.push(...subscriptions);
 }
 
 // TO-DO: add call to Hydrate Python script
