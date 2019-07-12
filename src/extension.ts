@@ -2,6 +2,11 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import * as k8s from 'vscode-kubernetes-tools-api';
+import * as path from 'path';
+// let {PythonShell} = require('python-shell');
+
+const {spawn} = require('child_process');
+const homedir = require('os').homedir();
 
 let kubectl: k8s.KubectlV1 | undefined = undefined;
 let clusterExplorer: k8s.ClusterExplorerV1 | undefined = undefined;
@@ -26,8 +31,34 @@ export async function activate (context: vscode.ExtensionContext) {
 	context.subscriptions.push(...subscriptions);
 }
 
-// TO-DO: add call to Hydrate Python script
+/**
+ * This method spawns a subprocess that calls Hydrate, which creates a Fabrikate 
+ * component.yaml file in the same directory as the Hydrate clone.
+ * 
+ * It currently uses the default values for all Hydrate options.
+ */
 function hydrateCluster () {
+	console.log('Hydrating...');
+	let isErr = false;
+
+	const subprocess = spawn('python3', ['-m', 'hydrate.hydrate', 'run'], {
+		cwd: homedir
+	});
+	
+	// outputs stdout of the Hydrate subprocess
+	subprocess.stdout.on('data', function (data: any) {
+		if (!isErr) {
+			console.log(data.toString());
+			console.log('Done!');
+		}
+	});
+
+	// outputs errors of subprocess
+	subprocess.stderr.on('data', function (data: any) {
+		let err = data.toString();
+		console.log(err);
+		isErr = true;
+	});
 
 }
 
