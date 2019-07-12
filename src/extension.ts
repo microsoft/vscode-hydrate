@@ -1,27 +1,35 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import * as k8s from 'vscode-kubernetes-tools-api';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
+let kubectl: k8s.KubectlV1 | undefined = undefined;
+let clusterExplorer: k8s.ClusterExplorerV1 | undefined = undefined;
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-		console.log('Congratulations, your extension "vscode-hydrate" is now active!');
+// Method called when extension is activated
+export async function activate (context: vscode.ExtensionContext) {
+	const clusterExplorerAPI = await k8s.extension.clusterExplorer.v1;
+	const kubectlAPI = await k8s.extension.kubectl.v1;
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('extension.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
+	if (!clusterExplorerAPI.available ||  !kubectlAPI.available) {
+		vscode.window.showErrorMessage("Unable to access Kubernetes extension");
+		return;
+	}
 
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World!');
-	});
+	clusterExplorer = clusterExplorerAPI.api;
+	kubectl = kubectlAPI.api;
+	
+	const subscriptions = [
+		vscode.commands.registerCommand('vshydrate.hydrateCluster', hydrateCluster),
+	];
 
-	context.subscriptions.push(disposable);
+	context.subscriptions.push(...subscriptions);
 }
 
-// this method is called when your extension is deactivated
+// TO-DO: add call to Hydrate Python script
+function hydrateCluster () {
+
+}
+
+// This method is called when extension is deactivated
 export function deactivate() {}

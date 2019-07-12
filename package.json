@@ -1,36 +1,63 @@
 {
 	"name": "vscode-hydrate",
-	"displayName": "vscode-hydrate",
+	"displayName": "VSCode Hydrate",
 	"description": "Hydrate for VSCode Kubernetes Tools",
+	"license": "MIT",
+	"publisher": "madelineliao",
 	"version": "0.0.1",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/microsoft/vscode-hydrate.git"
+	},
 	"engines": {
-		"vscode": "^1.36.0"
+		"vscode": "^1.35.0"
 	},
 	"categories": [
 		"Other"
 	],
+	"keywords": [
+		"bedrock",
+		"fabrikate",
+		"hydrate",
+		"kubernetes",
+		"k8s"
+	],
+	"icon": "icon.png",
+	"preview": true,
 	"activationEvents": [
-		"onCommand:extension.helloWorld"
+		"onView:extension.vsKubernetesExplorer",
+		"onCommand:vshydrate.hydrateCluster"
+	],
+	"extensionDependencies": [
+		"ms-kubernetes-tools.vscode-kubernetes-tools"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [{
-			"command": "extension.helloWorld",
-			"title": "Hello World"
-		}]
+		"commands": [
+			{
+				"command": "vshydrate.hydrateCluster",
+				"title": "Hydrate Cluster"
+			}
+		],
+		"menus": {
+			"view/item/context": [
+				{
+					"command": "vshydrate.hydrateCluster",
+					"when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.\\w*cluster/i",
+					"group": "hydrate"
+				}
+			]
+		}
 	},
 	"scripts": {
-		"vscode:prepublish": "npm run compile",
+		"vscode:prepublish": "npm run compile && npm run copy-assets",
 		"compile": "tsc -p ./",
+		"copy-assets": "cp -r ./assets ./out",
 		"watch": "tsc -watch -p ./",
 		"postinstall": "node ./node_modules/vscode/bin/install",
 		"test": "npm run compile && node ./node_modules/vscode/bin/test"
 	},
-	"devDependencies": {
-		"typescript": "^3.3.1",
-		"vscode": "^1.1.28",
-		"tslint": "^5.12.1",
-		"@types/node": "^10.12.21",
-		"@types/mocha": "^2.2.42"
+	"dependencies": {
+		"vscode-kubernetes-tools-api": "^1.0.0"
 	}
 }
