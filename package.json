@@ -16,8 +16,8 @@
 		"Other"
 	],
 	"keywords": [
-        "bedrock",
-        "fabrikate",
+		"bedrock",
+		"fabrikate",
 		"hydrate",
 		"kubernetes",
 		"k8s"
@@ -41,11 +41,11 @@
 		],
 		"menus": {
 			"view/item/context": [
-                {
-                    "command": "vshydrate.hydrateCluster",
-                    "when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.\\w*cluster/i",
-                    "group": "hydrate"
-                }
+				{
+					"command": "vshydrate.hydrateCluster",
+					"when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.\\w*cluster/i",
+					"group": "hydrate"
+				}
 			]
 		}
 	},
@@ -58,20 +58,10 @@
 		"test": "npm run compile && node ./node_modules/vscode/bin/test"
 	},
 	"devDependencies": {
-		"@types/mocha": "^2.2.42",
-		"@types/node": "^10.14.4",
-		"@types/shelljs": "^0.8.5",
-		"tslint": "^5.16.0",
 		"typescript": "^3.4.3",
 		"vscode": "^1.1.28"
 	},
 	"dependencies": {
-		"@types/json2md": "^1.5.0",
-		"@types/tmp": "^0.1.0",
-		"deep-object-diff": "^1.1.0",
-		"json2md": "^1.6.3",
-		"shelljs": "^0.8.3",
-		"tmp": "^0.1.0",
 		"vscode-kubernetes-tools-api": "^1.0.0"
 	}
 }
