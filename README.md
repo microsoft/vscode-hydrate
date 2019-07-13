@@ -12,6 +12,8 @@ Next, clone this repo, and open it in VSCode by running `code ./vscode-hydrate` 
 
 A new window will open running the VSCode Hydrate extension. Click the Kubernetes extension icon in the sidebar, then right-click the cluster you would like to Hydrate and click `Hydrate Cluster`. The Hydrate output can be seen in the Debug Console in the original window, and a `component.yaml` file will be generated in your home directory!
 
+Note: all clusters displayed in the sidebar are associated with the same `kubeconfig` file. To test out a different kubeconfig, click the "options" icon (the three dots) in the Kubernetes extension cluster explorer and click `Set Kubeconfig` to change the current `kubeconfig` file used. Then, you can run Hydrate on the newly displayed clusters with the new kubeconfig. 
+
 
 ## Dependencies
 * [VSCode Kubernetes Tools and its dependencies](https://github.com/Azure/vscode-kubernetes-tools)
