@@ -37,7 +37,8 @@ export async function activate (context: vscode.ExtensionContext) {
  * This method spawns a subprocess that calls Hydrate, which creates a Fabrikate 
  * component.yaml file in the same directory as the Hydrate clone.
  * 
- * It currently uses the default values for all Hydrate options.
+ * It runs Hydrate on the kubeconfig file associated with the clusters in the sidebar,
+ * and it currently uses the default values for the rest of the options.
  */
 function hydrateCluster (target?: any) {
 	let kubeconfig = getKubeConfig();
