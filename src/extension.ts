@@ -3,12 +3,10 @@
 import * as vscode from 'vscode';
 import * as k8s from 'vscode-kubernetes-tools-api';
 import * as path from 'path';
-// let {PythonShell} = require('python-shell');
-
-const {spawn} = require('child_process');
 
 // home directory
 const HOME = require('os').homedir();
+const {spawn} = require('child_process');
 
 let kubectl: k8s.KubectlV1 | undefined = undefined;
 let clusterExplorer: k8s.ClusterExplorerV1 | undefined = undefined;
