@@ -6,7 +6,9 @@ import * as path from 'path';
 // let {PythonShell} = require('python-shell');
 
 const {spawn} = require('child_process');
-const homedir = require('os').homedir();
+
+// home directory
+const HOME = require('os').homedir();
 
 let kubectl: k8s.KubectlV1 | undefined = undefined;
 let clusterExplorer: k8s.ClusterExplorerV1 | undefined = undefined;
@@ -37,12 +39,14 @@ export async function activate (context: vscode.ExtensionContext) {
  * 
  * It currently uses the default values for all Hydrate options.
  */
-function hydrateCluster () {
-	console.log('Hydrating...');
+function hydrateCluster (target?: any) {
+	let kubeconfig = getKubeConfig();
 	let isErr = false;
 
-	const subprocess = spawn('python3', ['-m', 'hydrate.hydrate', 'run'], {
-		cwd: homedir
+	console.log('Hydrating...');
+
+	const subprocess = spawn('python3', ['-m', 'hydrate.hydrate', '-k', kubeconfig, 'run'], {
+		cwd: HOME
 	});
 	
 	// outputs stdout of the Hydrate subprocess
@@ -60,6 +64,19 @@ function hydrateCluster () {
 		isErr = true;
 	});
 
+}
+
+function getKubeConfig () {
+	let kubeConfig = vscode.workspace.getConfiguration("vs-kubernetes")["vs-kubernetes.kubeconfig"];
+	if (!kubeConfig) {
+		kubeConfig = process.env.KUBECONFIG;
+	}
+
+	if (!kubeConfig) {
+		kubeConfig = HOME.concat('/.kube/config'); // default kubeconfig value
+	}
+
+	return kubeConfig;	
 }
 
 // This method is called when extension is deactivated
