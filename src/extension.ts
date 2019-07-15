@@ -1,17 +1,16 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import * as k8s from 'vscode-kubernetes-tools-api';
 import * as path from 'path';
 
-// home directory
-const HOME = require('os').homedir();
-const {spawn} = require('child_process');
+import {existsSync} from 'fs';
+import {homedir} from 'os';
+import {spawn} from 'child_process';
 
+const HOME = homedir();
 let kubectl: k8s.KubectlV1 | undefined = undefined;
 let clusterExplorer: k8s.ClusterExplorerV1 | undefined = undefined;
 
-// Method called when extension is activated
+
 export async function activate (context: vscode.ExtensionContext) {
 	const clusterExplorerAPI = await k8s.extension.clusterExplorer.v1;
 	const kubectlAPI = await k8s.extension.kubectl.v1;
@@ -31,20 +30,19 @@ export async function activate (context: vscode.ExtensionContext) {
 	context.subscriptions.push(...subscriptions);
 }
 
-/**
- * This method spawns a subprocess that calls Hydrate, which creates a Fabrikate 
- * component.yaml file in the same directory as the Hydrate clone.
- * 
- * It runs Hydrate on the kubeconfig file associated with the clusters in the sidebar,
- * and it currently uses the default values for the rest of the options.
- */
-function hydrateCluster (target?: any) {
-	let kubeconfig = getKubeConfig();
+
+function hydrateCluster () {
+	const kubeconfig = getKubeConfig();
 	let isErr = false;
+
+	if (!existsSync(kubeconfig)) {
+		vscode.window.showErrorMessage(`The kubeconfig file ${kubeconfig} does not exist.`);
+		return;
+	}
 
 	console.log('Hydrating...');
 
-	const subprocess = spawn('python3', ['-m', 'hydrate.hydrate', '-k', kubeconfig, 'run'], {
+	const subprocess = spawn('python3', ['-W ignore', '-m', 'hydrate.hydrate', '-k', kubeconfig, 'run'], {
 		cwd: HOME
 	});
 	
@@ -56,7 +54,7 @@ function hydrateCluster (target?: any) {
 		}
 	});
 
-	// outputs errors of subprocess
+	// outputs errors
 	subprocess.stderr.on('data', function (data: any) {
 		let err = data.toString();
 		console.log(err);
@@ -65,18 +63,18 @@ function hydrateCluster (target?: any) {
 
 }
 
-function getKubeConfig () {
+function getKubeConfig () : string {
 	let kubeConfig = vscode.workspace.getConfiguration("vs-kubernetes")["vs-kubernetes.kubeconfig"];
 	if (!kubeConfig) {
 		kubeConfig = process.env.KUBECONFIG;
 	}
 
 	if (!kubeConfig) {
-		kubeConfig = HOME.concat('/.kube/config'); // default kubeconfig value
+		kubeConfig = `${HOME}${path.sep}.kube${path.sep}config`; // default kubeconfig value
 	}
 
 	return kubeConfig;	
 }
 
-// This method is called when extension is deactivated
+
 export function deactivate() {}
