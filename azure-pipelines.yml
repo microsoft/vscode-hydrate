@@ -1,6 +1,9 @@
 trigger:
 - master
 
+pr:
+- master
+
 strategy:
   matrix:
     linux:
@@ -32,7 +35,7 @@ steps:
     echo ">>> Compiled vscode-test"
     cd sample
     echo ">>> Run sample integration test"
-    npm install && npm run compile && npm run test
+    npm install && npm run compile && npm run test && npm run lint
   displayName: Run Tests
   env:
     DISPLAY: ':99.0'

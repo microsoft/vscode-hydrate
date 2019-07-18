@@ -55,7 +55,7 @@
 		"lint": "tslint -p ./",
 		"watch": "tsc -watch -p ./",
 		"postinstall": "node ./node_modules/vscode/bin/install",
-		"pretest": "npm run compile",
+		"pretest": "npm run compile && npm run lint",
 		"test": "npm run compile && node ./node_modules/vscode/bin/test"
 	},
 	"devDependencies": {
