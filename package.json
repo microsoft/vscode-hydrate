@@ -50,12 +50,23 @@
 		}
 	},
 	"scripts": {
-		"vscode:prepublish": "npm run compile && npm run copy-assets",
+		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
-		"copy-assets": "cp -r ./assets ./out",
+		"lint": "tslint -p ./",
 		"watch": "tsc -watch -p ./",
 		"postinstall": "node ./node_modules/vscode/bin/install",
+		"pretest": "npm run compile && npm run lint",
 		"test": "npm run compile && node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.1",
+		"@types/mocha": "^5.2.6",
+		"@types/node": "^8.10.0",
+		"glob": "^7.1.4",
+		"mocha": "^6.1.4",
+		"tslint": "^5.16.0",
+		"typescript": "^3.5.1",
+		"vscode": "^1.1.21"
 	},
 	"dependencies": {
 		"vscode-kubernetes-tools-api": "^1.0.0"
