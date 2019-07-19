@@ -1,5 +1,5 @@
 # Hydrate Extension for Visual Studio Code
-[![Build Status](https://dev.azure.com/epicstuff/vscode-hydrate/_apis/build/status/madelineliao.vscode-hydrate?branchName=master)](https://dev.azure.com/epicstuff/vscode-hydrate/_build/latest?definitionId=103&branchName=master)
+[![Build Status](https://dev.azure.com/epicstuff/vscode-hydrate/_apis/build/status/microsoft.vscode-hydrate?branchName=master)](https://dev.azure.com/epicstuff/vscode-hydrate/_build/latest?definitionId=104&branchName=master)
 ## Overview
 This is the Visual Studio Code Hydrate extension, which builds upon the [VSCode Kubernetes Extension](https://github.com/Azure/vscode-kubernetes-tools). It allows developers to use [Hydrate](https://github.com/microsoft/hydrate) within VSCode, which crawls a Kubernetes cluster and generates a high level description in a `component.yaml` file for its deployments.
 
