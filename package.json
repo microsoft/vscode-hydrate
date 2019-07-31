@@ -10,7 +10,7 @@
 		"url": "https://github.com/microsoft/vscode-hydrate.git"
 	},
 	"engines": {
-		"vscode": "^1.35.0"
+		"vscode": "^1.31.0"
 	},
 	"categories": [
 		"Other"
