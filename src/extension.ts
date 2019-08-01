@@ -4,7 +4,6 @@ import * as path from 'path';
 
 import {existsSync} from 'fs';
 import {homedir} from 'os';
-import {spawn} from 'child_process';
 
 const HOME = homedir();
 let kubectl: k8s.KubectlV1 | undefined = undefined;
@@ -40,26 +39,9 @@ function hydrateCluster () {
 		return;
 	}
 
-	console.log('Hydrating...');
-
-	const subprocess = spawn('python3', ['-W ignore', '-m', 'hydrate.hydrate', '-k', kubeconfig, 'run'], {
-		cwd: HOME
-	});
-	
-	// outputs stdout of the Hydrate subprocess
-	subprocess.stdout.on('data', function (data: any) {
-		if (!isErr) {
-			console.log(data.toString());
-			console.log('Done!');
-		}
-	});
-
-	// outputs errors
-	subprocess.stderr.on('data', function (data: any) {
-		let err = data.toString();
-		console.log(err);
-		isErr = true;
-	});
+	const term = vscode.window.createTerminal('hydrate');
+	term.sendText(`python3 -W ignore -m hydrate.hydrate -k ${kubeconfig} run`);
+	term.show();
 
 }
 
