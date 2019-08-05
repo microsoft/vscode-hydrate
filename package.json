@@ -4,7 +4,7 @@
 	"description": "Hydrate for VSCode Kubernetes Tools",
 	"license": "MIT",
 	"publisher": "madelineliao",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/microsoft/vscode-hydrate.git"
