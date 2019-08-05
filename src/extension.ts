@@ -1,11 +1,9 @@
 import * as vscode from 'vscode';
 import * as k8s from 'vscode-kubernetes-tools-api';
-import * as path from 'path';
+
 
 import {existsSync} from 'fs';
-import {homedir} from 'os';
-
-const HOME = homedir();
+import {getKubeConfig} from './kubeconfig';
 let kubectl: k8s.KubectlV1 | undefined = undefined;
 let clusterExplorer: k8s.ClusterExplorerV1 | undefined = undefined;
 
@@ -30,7 +28,7 @@ export async function activate (context: vscode.ExtensionContext) {
 }
 
 
-function hydrateCluster () {
+export function hydrateCluster () {
 	const kubeconfig = getKubeConfig();
 	let isErr = false;
 
@@ -44,19 +42,5 @@ function hydrateCluster () {
 	term.show();
 
 }
-
-function getKubeConfig () : string {
-	let kubeConfig = vscode.workspace.getConfiguration("vs-kubernetes")["vs-kubernetes.kubeconfig"];
-	if (!kubeConfig) {
-		kubeConfig = process.env.KUBECONFIG;
-	}
-
-	if (!kubeConfig) {
-		kubeConfig = `${HOME}${path.sep}.kube${path.sep}config`; // default kubeconfig value
-	}
-
-	return kubeConfig;	
-}
-
 
 export function deactivate() {}

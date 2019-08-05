@@ -61,11 +61,13 @@
 		"@types/glob": "^7.1.1",
 		"@types/mocha": "^5.2.6",
 		"@types/node": "^8.10.0",
+		"@types/sinon": "^7.0.13",
 		"glob": "^7.1.4",
 		"mocha": "^6.1.4",
+		"sinon": "^7.3.2",
 		"tslint": "^5.16.0",
 		"typescript": "^3.5.1",
-		"vscode": "^1.1.21"
+		"vscode": "^1.1.36"
 	},
 	"dependencies": {
 		"vscode-kubernetes-tools-api": "^1.0.0"
