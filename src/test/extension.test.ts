@@ -31,7 +31,7 @@ suite("Test hydrateCluster", function () {
 
             hydrateClusterSpy();
 
-            assert(createTerminal.calledOnce);
+            assert(createTerminal.called);
             assert(vscode.window.terminals[0].name === 'hydrate');
         });
 
