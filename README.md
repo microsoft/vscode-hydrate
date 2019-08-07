@@ -14,6 +14,20 @@ Navigate to the Kubernetes view by clicking the Kubernetes icon in the sidebar. 
 
 Note: all clusters displayed in the sidebar are associated with the same `kubeconfig` file. To test out a different kubeconfig, click the "options" icon (the three dots) in the Kubernetes extension cluster explorer and click `Set Kubeconfig` to change the current `kubeconfig` file used. Then, you can run Hydrate on the newly displayed clusters with the new kubeconfig. 
 
+## Testing the Extension
+First, clone the repo locally by running the following command:
+```
+git clone https://github.com/microsoft/vscode-hydrate
+```
+
+There are two ways to run tests:
+1. From within the locally cloned repo, run the command 
+```
+npm test
+```
+2. Open the repo in VSCode by running 
+```code ./vscode-hydrate```
+from wherever the cloned repo lives, then navigate to the Debugger view in the sidebar. Click the dropdown next to the green 'play' button, and click `Extension Tests`. Then click the play button to run the tests. Output will be printed to the VSCode `Debug Console`.
 
 ## Dependencies
 * [VSCode Kubernetes Tools and its dependencies](https://github.com/Azure/vscode-kubernetes-tools)
