@@ -1,12 +1,10 @@
 import * as vscode from 'vscode';
 import * as k8s from 'vscode-kubernetes-tools-api';
 
-
 import {existsSync} from 'fs';
 import {getKubeConfig} from './kubeconfig';
 let kubectl: k8s.KubectlV1 | undefined = undefined;
 let clusterExplorer: k8s.ClusterExplorerV1 | undefined = undefined;
-
 
 export async function activate (context: vscode.ExtensionContext) {
 	const clusterExplorerAPI = await k8s.extension.clusterExplorer.v1;
@@ -38,9 +36,9 @@ export function hydrateCluster () {
 	}
 
 	const term = vscode.window.createTerminal('hydrate');
-	term.sendText(`python3 -W ignore -m hydrate.hydrate -k ${kubeconfig} run`);
 	term.show();
-
+	term.sendText(`cd && python3 -W ignore -m hydrate.hydrate -k ${kubeconfig} run`);
+	
 }
 
 export function deactivate() {}

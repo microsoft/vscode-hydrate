@@ -1,17 +1,13 @@
-import * as vscode from 'vscode';
-import * as path from 'path';
-import {homedir} from 'os';
-
-const HOME = homedir();
+import {getVscodeKubeConfig, getDefaultKubeConfig, getEnvKubeConfig} from './getKubeHelpers';
 
 export function getKubeConfig () : string {
-	let kubeConfig = vscode.workspace.getConfiguration("vs-kubernetes")["vs-kubernetes.kubeconfig"];
+	let kubeConfig = getVscodeKubeConfig();
 	if (!kubeConfig) {
-		kubeConfig = process.env.KUBECONFIG;
+		kubeConfig = getEnvKubeConfig();
 	}
 
 	if (!kubeConfig) {
-		kubeConfig = `${HOME}${path.sep}.kube${path.sep}config`; // default kubeconfig value
+		kubeConfig = getDefaultKubeConfig();
 	}
 
 	return kubeConfig;	
