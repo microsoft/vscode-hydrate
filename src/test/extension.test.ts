@@ -51,8 +51,6 @@ suite('Test getKubeConfig', function () {
             const kubeconfig = KubeConfig.getKubeConfig();
 
             assert(kubeconfig === KubeHelpers.getEnvKubeConfig() || kubeconfig === KubeHelpers.getDefaultKubeConfig());
-
-            sinon.restore();
         });
 
     });
@@ -64,8 +62,6 @@ suite('Test getKubeConfig', function () {
             const kubeconfig = KubeConfig.getKubeConfig();
 
             assert(kubeconfig === KubeHelpers.getVscodeKubeConfig());
-
-            sinon.restore();
         });
 
     });
@@ -79,8 +75,6 @@ suite('Test getKubeConfig', function () {
             const kubeconfig = KubeConfig.getKubeConfig();
 
             assert(kubeconfig === KubeHelpers.getDefaultKubeConfig());
-
-            sinon.restore();
         });
 
     });
