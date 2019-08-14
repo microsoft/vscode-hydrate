@@ -10,7 +10,7 @@ First, make sure that you have cloned [Hydrate](https://github.com/microsoft/hyd
 
 Next, download the extension [here](https://marketplace.visualstudio.com/items?itemName=madelineliao.vscode-hydrate). If you do not have the [VSCode Kubernetes Extension](https://github.com/Azure/vscode-kubernetes-tools) installed, it will automatically be installed during the Hydrate extension installation. A window reload is required after installation.
 
-Navigate to the Kubernetes view by clicking the Kubernetes icon in the sidebar. Right-click the cluster you would like to run Hydrate on, and select `Hydrate Cluster`. A `component.yaml` file for the corresponding kubeconfig file will be generated in your home directory!
+Navigate to the Kubernetes view by clicking the Kubernetes icon in the sidebar. Right-click the cluster you would like to run Hydrate on, and select `Hydrate Cluster`. You will be prompted step-by-step through selecting options for Hydrate (e.g. output file path).
 
 Note: all clusters displayed in the sidebar are associated with the same `kubeconfig` file. To test out a different kubeconfig, click the "options" icon (the three dots) in the Kubernetes extension cluster explorer and click `Set Kubeconfig` to change the current `kubeconfig` file used. Then, you can run Hydrate on the newly displayed clusters with the new kubeconfig. 
 
