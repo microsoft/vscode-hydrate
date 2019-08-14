@@ -3,7 +3,6 @@ import * as k8s from 'vscode-kubernetes-tools-api';
 
 import { existsSync } from 'fs';
 import { getKubeConfig } from './kubeconfig';
-import { MultiStepInput } from './multiStepInput';
 import { HydrateInput } from './hydrateInput';
 
 let kubectl: k8s.KubectlV1 | undefined = undefined;
