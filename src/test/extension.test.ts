@@ -5,6 +5,7 @@ import * as KubeConfig from '../kubeconfig';
 import * as KubeHelpers from '../getKubeHelpers';
 import * as vscode from 'vscode';
 import * as fs from 'fs';
+import { HydrateInput } from '../hydrateInput';
 
 
 teardown(sinon.restore);
@@ -25,16 +26,18 @@ suite('Test hydrateCluster', function () {
         });
     });
 
-    suite('If kubeconfig is found', function () {
+    suite('If kubeconfig is found and input is entered', function () {
         test('VSCode should create a terminal named \'hydrate\'', function () {
             sinon.stub(fs, 'existsSync').returns(true);
             const hydrateClusterSpy = sinon.spy(Extension, 'hydrateCluster');
             const createTerminal = sinon.spy(vscode.window, 'createTerminal');
 
-            hydrateClusterSpy();
-            assert(hydrateClusterSpy.calledOnce);
-            assert(createTerminal.called);
-            assert(vscode.window.terminals[0].name === 'hydrate');
+            hydrateClusterSpy().then(() => {
+                assert(hydrateClusterSpy.calledOnce);
+                assert(createTerminal.called);
+                assert(vscode.window.terminals[0].name === 'hydrate');
+            });
+            
         });
 
     });
