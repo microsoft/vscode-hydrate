@@ -14,6 +14,11 @@ Navigate to the Kubernetes view by clicking the Kubernetes icon in the sidebar. 
 
 Note: all clusters displayed in the sidebar are associated with the same `kubeconfig` file. To test out a different kubeconfig, click the "options" icon (the three dots) in the Kubernetes extension cluster explorer and click `Set Kubeconfig` to change the current `kubeconfig` file used. Then, you can run Hydrate on the newly displayed clusters with the new kubeconfig. 
 
+![](https://thumbs.gfycat.com/DifficultPiercingIndianjackal-size_restricted.gif)
+
+For example, the results of running a verbose dry-run:
+
+![alt text](https://thumbs.gfycat.com/CreativeSpectacularHound-size_restricted.gif)
 ## Testing the Extension
 First, clone the repo locally by running the following command:
 ```
