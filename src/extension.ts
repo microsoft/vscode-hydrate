@@ -1,8 +1,10 @@
 import * as vscode from 'vscode';
 import * as k8s from 'vscode-kubernetes-tools-api';
 
-import {existsSync} from 'fs';
-import {getKubeConfig} from './kubeconfig';
+import { existsSync } from 'fs';
+import { getKubeConfig } from './kubeconfig';
+import { HydrateInput } from './hydrateInput';
+
 let kubectl: k8s.KubectlV1 | undefined = undefined;
 let clusterExplorer: k8s.ClusterExplorerV1 | undefined = undefined;
 
@@ -19,14 +21,14 @@ export async function activate (context: vscode.ExtensionContext) {
 	kubectl = kubectlAPI.api;
 	
 	const subscriptions = [
-		vscode.commands.registerCommand('vshydrate.hydrateCluster', hydrateCluster),
+		vscode.commands.registerCommand('vshydrate.hydrateCluster', hydrateCluster)
 	];
 
 	context.subscriptions.push(...subscriptions);
 }
 
 
-export function hydrateCluster () {
+export async function hydrateCluster () {
 	const kubeconfig = getKubeConfig();
 	let isErr = false;
 
@@ -35,10 +37,25 @@ export function hydrateCluster () {
 		return;
 	}
 
-	const term = vscode.window.createTerminal('hydrate');
-	term.show();
-	term.sendText(`cd && python3 -W ignore -m hydrate.hydrate -k ${kubeconfig} run`);
+
+	const input = new HydrateInput();
+	const inputEntered = await input.get();
+
+	if (inputEntered) {
+		const term = vscode.window.createTerminal('hydrate');
+		let termCommand = `cd && python3 -W ignore -m hydrate.hydrate -k ${kubeconfig}`;
+
+		input.args.forEach(function (arg) {
+			termCommand = termCommand.concat(arg);
+		});
+
+		termCommand = termCommand.concat(' run');
+		term.show();
+		term.sendText(termCommand);
+	}
 	
 }
+
+
 
 export function deactivate() {}
