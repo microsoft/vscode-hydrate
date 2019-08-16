@@ -42,7 +42,7 @@
 			"view/item/context": [
 				{
 					"command": "vshydrate.hydrateCluster",
-					"when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.\\w*cluster/i",
+					"when": "view == extension.vsKubernetesExplorer && viewItem =~ /vsKubernetes\\.\\w*cluster(?!.*\\.inactive$).*/i",
 					"group": "hydrate"
 				}
 			]
