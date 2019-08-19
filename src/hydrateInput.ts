@@ -70,7 +70,6 @@ export class HydrateInput {
 
         if (file) {
             this.outputPath = file[0].fsPath;
-            this.args.push(` -o ${this.outputPath}`);
         }
 
         return (input: MultiStepInput) => this.setFlags(input);
