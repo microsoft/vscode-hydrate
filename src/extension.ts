@@ -4,9 +4,7 @@ import * as k8s from 'vscode-kubernetes-tools-api';
 import { existsSync } from 'fs';
 import { getKubeConfig } from './kubeconfig';
 import { HydrateInput } from './hydrateInput';
-import { homedir } from 'os';
 
-const HOME = homedir;
 const IMAGE_NAME = 'mcr.microsoft.com/k8s/bedrock/hydrate:1.0';
 
 let kubectl: k8s.KubectlV1 | undefined = undefined;

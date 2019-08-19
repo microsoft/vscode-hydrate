@@ -6,9 +6,7 @@ This is the Visual Studio Code Hydrate extension, which builds upon the [VSCode 
 Instead of running Hydrate from the command line and entering flags and options manually, this extension allows users to select a Kubernetes cluster and run Hydrate within VSCode.
  
 ## Install the Extension!
-First, make sure that you have cloned [Hydrate](https://github.com/microsoft/hydrate) into your home directory (currently, the extension uses the home directory as the default path to the Hydrate clone).
-
-Next, download the extension [here](https://marketplace.visualstudio.com/items?itemName=madelineliao.vscode-hydrate). If you do not have the [VSCode Kubernetes Extension](https://github.com/Azure/vscode-kubernetes-tools) installed, it will automatically be installed during the Hydrate extension installation. A window reload is required after installation.
+First, make sure that you have [Docker](https://www.docker.com/) set up (the extension runs Hydrate on Docker). Next, download the extension [here](https://marketplace.visualstudio.com/items?itemName=madelineliao.vscode-hydrate). If you do not have the [VSCode Kubernetes Extension](https://github.com/Azure/vscode-kubernetes-tools) installed, it will automatically be installed during the Hydrate extension installation. A window reload is required after installation.
 
 Navigate to the Kubernetes view by clicking the Kubernetes icon in the sidebar. Right-click the cluster you would like to run Hydrate on, and select `Hydrate Cluster`. You will be prompted step-by-step through selecting options for Hydrate (e.g. output file path).
 
