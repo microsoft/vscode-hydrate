@@ -54,6 +54,7 @@ export async function hydrateCluster () {
 		});
 
 		term.show();
+		term.sendText(dockerPull);
 		term.sendText(dockerRun);
 	}
 	
