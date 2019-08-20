@@ -5,6 +5,8 @@ import { existsSync } from 'fs';
 import { getKubeConfig } from './kubeconfig';
 import { HydrateInput } from './hydrateInput';
 
+const IMAGE_NAME = 'mcr.microsoft.com/k8s/bedrock/hydrate:1.0';
+
 let kubectl: k8s.KubectlV1 | undefined = undefined;
 let clusterExplorer: k8s.ClusterExplorerV1 | undefined = undefined;
 
@@ -43,15 +45,16 @@ export async function hydrateCluster () {
 
 	if (inputEntered) {
 		const term = vscode.window.createTerminal('hydrate');
-		let termCommand = `cd && python3 -W ignore -m hydrate.hydrate -k ${kubeconfig}`;
+		const dockerPull = `docker pull ${IMAGE_NAME}`;
+
+		let dockerRun = `docker run -v ${kubeconfig}:/config -v ${input.outputPath}:/app/out ${IMAGE_NAME} -k /config`;
 
 		input.args.forEach(function (arg) {
-			termCommand = termCommand.concat(arg);
+			dockerRun = dockerRun.concat(arg);
 		});
 
-		termCommand = termCommand.concat(' run');
 		term.show();
-		term.sendText(termCommand);
+		term.sendText(dockerRun);
 	}
 	
 }
